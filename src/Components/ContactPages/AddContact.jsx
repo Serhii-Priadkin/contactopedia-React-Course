@@ -74,7 +74,7 @@ class AddContact extends React.Component {
               </div>
             )}
 
-            <div className="row-3 p-1">
+            <div className="row-3 p-1 ">
               <button className="btn btn-primary btn-sm form-control">
                 Create
               </button>
