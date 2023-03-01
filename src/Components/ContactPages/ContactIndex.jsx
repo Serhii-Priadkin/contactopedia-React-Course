@@ -48,7 +48,7 @@ class ContactIndex extends React.Component {
         return true;
       }
     });
-    if (duplicateRecord.length>0) {
+    if (duplicateRecord.length > 0) {
       return { status: "failure", msg: "Duplicate Record" };
     } else {
       const newFinalContact = {
@@ -61,8 +61,21 @@ class ContactIndex extends React.Component {
           contactList: prevState.contactList.concat([newFinalContact]),
         };
       });
-      return{status:"success",msg:"Contact was added successsfully"};
+      return { status: "success", msg: "Contact was added successsfully" };
     }
+  };
+
+  handleToggleFavorites = (contact) => {
+    this.setState((prevState) => {
+      return {
+        contactList: prevState.contactList.map((obj) => {
+          if (obj.id == contact.id) {
+            return { ...obj, isFavorite: !obj.isFavorite };
+          }
+          return obj;
+        }),
+      };
+    });
   };
 
   render() {
@@ -88,6 +101,7 @@ class ContactIndex extends React.Component {
                   contacts={this.state.contactList.filter(
                     (u) => u.isFavorite == true
                   )}
+                  favoriteClick={this.handleToggleFavorites}
                 />
               </div>
             </div>
@@ -97,6 +111,7 @@ class ContactIndex extends React.Component {
                   contacts={this.state.contactList.filter(
                     (u) => u.isFavorite == false
                   )}
+                  favoriteClick={this.handleToggleFavorites}
                 />
               </div>
             </div>
